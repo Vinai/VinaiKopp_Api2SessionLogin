@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <VinaiKopp_Api2SessionLogin>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Core/>
+                <Mage_Api2/>
+                <Mage_Customer/>
+                <VinaiKopp_Api2SessionAuthAdapter/>
+            </depends>
+        </VinaiKopp_Api2SessionLogin>
+    </modules>
+</config>

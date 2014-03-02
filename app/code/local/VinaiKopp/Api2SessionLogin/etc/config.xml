@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <models>
+            <vinaikopp_api2sessionlogin>
+                <class>VinaiKopp_Api2SessionLogin_Model</class>
+            </vinaikopp_api2sessionlogin>
+        </models>
+        <helpers>
+            <vinaikopp_api2sessionlogin>
+                <class>VinaiKopp_Api2SessionLogin_Helper</class>
+            </vinaikopp_api2sessionlogin>
+        </helpers>
+    </global>
+</config>
