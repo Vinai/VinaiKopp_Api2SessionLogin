@@ -1,0 +1,16 @@
+{
+  "name":"vinaikopp/api2sessionlogin",
+  "type":"magento-module",
+  "license":"OSL-3.0",
+  "homepage":"https://github.com/Vinai/VinaiKopp_Api2SessionLogin",
+  "description":"This Magento extension is only interesting to developers implementing a webapp running on the same host as the Magento instance.",
+  "authors":[
+    {
+      "name":"Vinai Kopp",
+      "email":"vinai@netzarbeiter.com"
+    }
+  ],
+  "require":{
+    "magento-hackathon/magento-composer-installer":"*"
+  }
+}
