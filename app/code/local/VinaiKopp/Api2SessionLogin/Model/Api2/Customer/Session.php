@@ -166,6 +166,7 @@ class VinaiKopp_Api2SessionLogin_Model_Api2_Customer_Session
                     throw new Mage_Api2_Exception($e->getMessage(), Mage_Api2_Model_Server::HTTP_UNAUTHORIZED);
                 }
             }
+            Mage::logException($e);
             $this->_critical(self::RESOURCE_INTERNAL_ERROR);
         }
     }
