@@ -35,8 +35,7 @@
                         <retrieve>1</retrieve>
                     </guest>
                 </privileges>
-                <attributes translate="isloggedin login password"
-                            module="vinaikopp_api2sessionlogin">
+                <attributes translate="isloggedin login password" module="vinaikopp_api2sessionlogin">
                     <isloggedin>Is Logged In</isloggedin>
                     <login>Login</login>
                     <password>Password</password>
@@ -49,12 +48,22 @@
                             <login>1</login>
                             <password>1</password>
                         </read>
+                        <write>
+                            <isloggedin>1</isloggedin>
+                            <firstname>1</firstname>
+                            <lastname>1</lastname>
+                        </write>
                     </customer>
                     <guest>
                         <read>
                             <login>1</login>
                             <password>1</password>
                         </read>
+                        <write>
+                            <isloggedin>1</isloggedin>
+                            <firstname>1</firstname>
+                            <lastname>1</lastname>
+                        </write>
                     </guest>
                 </exclude_attributes>
                 <routes>
