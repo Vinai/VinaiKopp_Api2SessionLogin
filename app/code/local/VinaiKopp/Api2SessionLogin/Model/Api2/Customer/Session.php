@@ -160,9 +160,13 @@ class VinaiKopp_Api2SessionLogin_Model_Api2_Customer_Session
             $helper->startFrontendSession();
             $session = $this->getSession();
             $session->login($data['login'], $data['password']);
-        } catch (Mage_Core_Exception $e) {
-            $this->_error($e->getMessage(), Mage_Api2_Model_Server::HTTP_UNAUTHORIZED);
         } catch (Exception $e) {
+            if ($e instanceof Mage_Core_Exception) {
+                if ($e->getCode() == Mage_Customer_Model_Customer::EXCEPTION_INVALID_EMAIL_OR_PASSWORD || $e->getCode() == Mage_Customer_Model_Customer::EXCEPTION_EMAIL_NOT_CONFIRMED) {
+                    throw new Mage_Api2_Exception($e->getMessage(), Mage_Api2_Model_Server::HTTP_UNAUTHORIZED);
+                }
+            }
+            Mage::logException($e);
             $this->_critical(self::RESOURCE_INTERNAL_ERROR);
         }
     }
