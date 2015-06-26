@@ -94,6 +94,11 @@ class VinaiKopp_Api2SessionLogin_Model_Api2_Customer_Session
                     if ($this->getResponse()->isException()) {
                         break;
                     }
+
+                    // This fixes a 'bug' with calling in() and out() on the same filter in one request
+                    /** @var $filter Mage_Api2_Model_Acl_Filter */
+                    $filter = Mage::getModel('api2/acl_filter', $this);
+                    $this->setFilter($filter);
                 }
             // break statement left out intentionally!
 
