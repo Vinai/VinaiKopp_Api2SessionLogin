@@ -144,20 +144,9 @@ class VinaiKopp_Api2SessionLogin_Model_Api2_Customer_Session
      */
     protected function _create(array $data)
     {
-        $validator = Mage::getModel('vinaikopp_api2sessionlogin/api2_customer_validator_login');
-
-        $data = $validator->filter($data);
-        if (!$validator->isValidData($data)) {
-            foreach ($validator->getErrors() as $error) {
-                $this->_error($error, Mage_Api2_Model_Server::HTTP_BAD_REQUEST);
-            }
+        if (!isset($data['login']) || !isset($data['password'])) {
             $this->_critical(self::RESOURCE_DATA_PRE_VALIDATION_ERROR);
-
-            // The following line with the closing } isn't picked up by
-            // test code coverage because critical throws an exception.
-            // @codeCoverageIgnoreStart
         }
-        // @codeCoverageIgnoreEnd
 
         try {
             $helper = $this->getHelper();
