@@ -144,33 +144,24 @@ class VinaiKopp_Api2SessionLogin_Model_Api2_Customer_Session
      */
     protected function _create(array $data)
     {
-        $validator = Mage::getModel('vinaikopp_api2sessionlogin/api2_customer_validator_login');
-
-        $data = $validator->filter($data);
-        if (!$validator->isValidData($data)) {
-            foreach ($validator->getErrors() as $error) {
-                $this->_error($error, Mage_Api2_Model_Server::HTTP_BAD_REQUEST);
-            }
+        if (!isset($data['login']) || !isset($data['password'])) {
             $this->_critical(self::RESOURCE_DATA_PRE_VALIDATION_ERROR);
-
-            // The following line with the closing } isn't picked up by
-            // test code coverage because critical throws an exception.
-            // @codeCoverageIgnoreStart
         }
-        // @codeCoverageIgnoreEnd
 
         try {
             $helper = $this->getHelper();
-            $helper->initFrontendStore();
             $helper->startFrontendSession();
             $session = $this->getSession();
             $session->login($data['login'], $data['password']);
-        } catch (Exception $e) {
-            if ($e instanceof Mage_Core_Exception) {
-                if ($e->getCode() == Mage_Customer_Model_Customer::EXCEPTION_INVALID_EMAIL_OR_PASSWORD || $e->getCode() == Mage_Customer_Model_Customer::EXCEPTION_EMAIL_NOT_CONFIRMED) {
-                    throw new Mage_Api2_Exception($e->getMessage(), Mage_Api2_Model_Server::HTTP_UNAUTHORIZED);
-                }
+        } catch(Mage_Api2_Exception $e) {
+            throw $e;
+        } catch (Mage_Core_Exception $e) {
+            if ($e->getCode() == Mage_Customer_Model_Customer::EXCEPTION_INVALID_EMAIL_OR_PASSWORD || $e->getCode() == Mage_Customer_Model_Customer::EXCEPTION_EMAIL_NOT_CONFIRMED) {
+                throw new Mage_Api2_Exception($e->getMessage(), Mage_Api2_Model_Server::HTTP_UNAUTHORIZED);
             }
+            Mage::logException($e);
+            $this->_critical(self::RESOURCE_INTERNAL_ERROR);
+        } catch (Exception $e) {
             Mage::logException($e);
             $this->_critical(self::RESOURCE_INTERNAL_ERROR);
         }
