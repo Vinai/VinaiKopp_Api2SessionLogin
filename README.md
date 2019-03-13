@@ -1,3 +1,8 @@
+# This Magento 1 extension is orphaned, unsupported and no longer maintained.
+
+If you use it, you are effectively adopting the code for your own project.
+
+
 Api2 Session Login Resource
 ===========================
 This Magento extension is only interesting to developers implementing a webapp running on the same host as the Magento instance.  
